@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>云上埙声馆 - 听见生命的律动</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C53030', // 红色主色调
+            secondary: '#822727',
+            accent: '#D69E2E', // 温暖的金黄色作为辅助色
+            dark: '#2D3748',
+            light: '#F7FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Noto Serif SC', 'Georgia', 'serif']
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .bg-texture {
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .text-balance {
+        text-wrap: balance;
+      }
+    }
+  </style>
+</head>
+<body class="bg-light text-dark bg-texture">
+	
+  <!-- 导航栏 -->
+  <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-primary font-bold text-xl flex items-center">
+        <i class="fa fa-music mr-2"></i>云上埙声馆
+      </a>
+      <div class="hidden md:flex space-x-6">
+        <a href="#storyteller" class="hover:text-primary transition-colors">故事人</a>
+        <a href="#background" class="hover:text-primary transition-colors">故事背景</a>
+        <a href="#special" class="hover:text-primary transition-colors">特别之处</a>
+        <a href="#gallery" class="hover:text-primary transition-colors">精彩瞬间</a>
+        <a href="#donate" class="hover:text-primary transition-colors">支持我们</a>
+      </div>
+      <button id="mobile-menu-button" class="md:hidden text-dark focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#storyteller" class="py-2 hover:text-primary transition-colors">故事人</a>
+        <a href="#background" class="py-2 hover:text-primary transition-colors">故事背景</a>
+        <a href="#special" class="py-2 hover:text-primary transition-colors">特别之处</a>
+        <a href="#gallery" class="py-2 hover:text-primary transition-colors">精彩瞬间</a>
+        <a href="#donate" class="py-2 hover:text-primary transition-colors">支持我们</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区 -->
+  <header class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent -z-10"></div>
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl">
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-dark mb-6 leading-tight">
+          听见<br>生命的律动
+        </h1>
+        <p class="text-gray-700 text-[clamp(1rem,2vw,1.25rem)] mb-8 max-w-2xl text-balance">
+          云上埙声馆致力于用陶埙的低频振动，为听障儿童打开感知音乐的新窗口，让每一个孩子都能触摸到音乐的形状。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#storyteller" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
+            了解更多
+          </a>
+          <a href="#donate" class="bg-white hover:bg-gray-100 text-primary border border-primary px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300">
+            支持项目
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute right-0 bottom-0 top-24 w-1/2 md:w-2/5 -z-10 hidden lg:block">
+      <img src="../img/6.png" alt="听障儿童感受陶埙振动" class="w-full h-full object-cover opacity-90">
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pb-16">
+    <!-- 故事人 -->
+    <section id="storyteller" class="mb-20 scroll-mt-24">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">故事人</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <h3 class="text-2xl font-bold text-dark mb-6">夏清颜：用陶埙拓印无声的音阶</h3>
+          <p class="text-gray-700 mb-4">
+            夏清颜是一位听障儿童……
+          </p>
+          <p class="text-gray-700 mb-4">
+            2017 年，她在博物馆文物修复室，目睹匠人修复唐代陶埙时，指尖轻叩埙身激起的细微震颤。这一幕让她顿悟：陶埙的每道裂痕、每个指孔，都能通过触摸转化为 “听得见” 的节奏。随后她创立 “埙纹知音” 计划，致力于将陶埙的造型美学与振动频率结合，让听障伙伴通过抚摸陶埙的纹路起伏，感知音乐的抑扬顿挫。
+          </p>
+          <p class="text-gray-700 mb-6">
+           “每个灵魂都有专属的聆听方式，哪怕世界静音，也能借陶埙的肌理拓印出旋律的模样。” 文物修复师陈默说，“陶埙带着历史温度的振动，正为听障女孩的指尖铺展一幅可触摸的音乐画卷。”
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-gray-50 p-4 rounded-lg flex-1 min-w-[200px]">
+              <div class="text-primary text-3xl font-bold mb-2"> </div>
+              <div class="text-gray-700"> </div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg flex-1 min-w-[200px]">
+              <div class="text-primary text-3xl font-bold mb-2"> </div>
+              <div class="text-gray-700"> </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-1 lg:order-2 relative">
+          <div class="rounded-2xl overflow-hidden shadow-xl">
+            <img src="../img/4.1.jpg" alt="林溪老师指导儿童感受陶埙" class="w-full h-auto">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-primary text-white p-4 rounded-lg shadow-lg hidden md:block">
+            <p class="font-bold">"音乐不仅仅是听觉的艺术，也可以是触觉的盛宴"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 故事背景 -->
+    <section id="background" class="mb-20 scroll-mt-24">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">故事背景</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="p-8 md:p-12">
+            <h3 class="text-2xl font-bold text-dark mb-6">用触觉感知音乐的创新探索</h3>
+            <p class="text-gray-700 mb-4">
+              "云上埙声馆"项目始于2025年，是一个致力于通过陶埙帮助听障儿童感知音乐的公益项目。项目团队发现，陶埙的低频振动特性使其成为一种理想的乐器，可以通过触觉被听障儿童感知。
+            </p>
+            <p class="text-gray-700 mb-4">
+              在项目中，孩子们通过触摸陶埙的不同部位来感受振动的差异，用脸颊贴近陶埙来感知声音的强弱变化。这种独特的音乐体验方式，让听障儿童能够以一种全新的方式与音乐互动。
+            </p>
+            <p class="text-gray-700 mb-6">
+              经过多年的实践和研究，项目团队开发了一套专门针对听障儿童的陶埙教学方法，帮助孩子们通过触觉感知音乐的节奏、音高和情感，从而促进他们的身心发展和社交能力。
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-2 rounded-full text-primary mr-4 mt-1">
+                  <i class="fa fa-check"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">多感官体验</h4>
+                  <p class="text-gray-600">结合触觉、视觉和振动感知，创造全方位的音乐体验</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-2 rounded-full text-primary mr-4 mt-1">
+                  <i class="fa fa-check"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">个性化教学</h4>
+                  <p class="text-gray-600">根据每个孩子的特点和需求，定制专属的教学方案</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-2 rounded-full text-primary mr-4 mt-1">
+                  <i class="fa fa-check"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">艺术与治疗结合</h4>
+                  <p class="text-gray-600">不仅是音乐教育，也是一种有效的康复治疗手段</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative h-64 md:h-auto">
+            <img src="../img/2.0.jpg" alt="听障儿童感受陶埙振动" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+              <div class="p-6 md:p-8">
+                <p class="text-white text-xl font-bold">"音乐不再是遥不可及的梦想，而是触手可及的现实"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 特别之处 -->
+    <section id="special" class="mb-20 scroll-mt-24">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">特别之处</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto">
+          云上埙声馆项目的独特之处，在于它为听障儿童创造了一种全新的音乐体验方式，让他们能够以自己的方式感知和表达音乐。
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-hand-paper-o text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">触觉感知音乐</h3>
+            <p class="text-gray-700">
+              陶埙的低频振动能通过触觉被听障儿童清晰感知，让他们用身体感受音乐的节奏和韵律。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-heart text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">情感表达新途径</h3>
+            <p class="text-gray-700">
+              通过感知音乐，听障儿童能够找到一种新的情感表达方式，增强自我认知和社交能力。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-gift text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">公益支持计划</h3>
+            <p class="text-gray-700">
+              每售出一只陶埙，我们将捐赠部分收益用于听障儿童音乐教育，让更多孩子受益。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-child text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">个性化教学</h3>
+            <p class="text-gray-700">
+              根据每个孩子的特点和需求，定制专属的教学方案，确保最佳的学习效果。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-music text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">传统与现代结合</h3>
+            <p class="text-gray-700">
+              将传统陶埙艺术与现代音乐教育理念相结合，创造独特的音乐学习体验。
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+          <div class="h-48 bg-primary/10 flex items-center justify-center">
+            <i class="fa fa-users text-6xl text-primary"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-3">社区支持网络</h3>
+            <p class="text-gray-700">
+              建立家长、教师和志愿者组成的支持网络，为孩子们提供持续的学习和成长环境。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 精彩瞬间 -->
+    <section id="gallery" class="mb-20 scroll-mt-24">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">精彩瞬间</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto">
+          记录孩子们在云上埙声馆的成长和欢乐时刻，见证音乐如何改变他们的生活。
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rounded-xl overflow-hidden shadow-md group">
+          <div class="relative overflow-hidden">
+            <img src="../img/2.2.jpg" alt="儿童触摸陶埙感受振动" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="text-white p-4 text-center">
+                <p class="font-bold">小颜第一次感受到陶埙的振动</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rounded-xl overflow-hidden shadow-md group">
+          <div class="relative overflow-hidden">
+            <img src="../img/6.00.png" alt="儿童展示自己制作的陶埙" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="text-white p-4 text-center">
+                <p class="font-bold">孩子展示自己亲手制作的陶埙</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rounded-xl overflow-hidden shadow-md group">
+          <div class="relative overflow-hidden">
+            <img src="../img/000.jpg" alt="志愿者指导儿童演奏陶埙" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="text-white p-4 text-center">
+                <p class="font-bold">志愿者耐心指导孩子们演奏</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- 支持我们 -->
+    <section id="donate" class="scroll-mt-24">
+      <div class="bg-primary/5 rounded-2xl p-8 md:p-12">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">支持我们</h2>
+          <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            您的支持将帮助更多听障儿童感受到音乐的美好。每一份爱心，都能为他们的世界带来更多色彩。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fa fa-heart text-2xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark text-center mb-4">捐赠资金</h3>
+            <p class="text-gray-700 mb-6 text-center">
+              您的资金捐赠将直接用于购买教学设备、教材和支持更多听障儿童参与项目。
+            </p>
+            <a href="./shpay.html" class="block text-center bg-primary hover:bg-secondary text-white py-3 rounded-lg transition-colors">
+              立即捐赠
+            </a>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fa fa-users text-2xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark text-center mb-4">成为志愿者</h3>
+            <p class="text-gray-700 mb-6 text-center">
+              如果您热爱音乐或特殊教育，欢迎成为我们的志愿者，为孩子们提供帮助和支持。
+            </p>
+            <a href="./zhiyuanzhe.html" class="block text-center bg-primary hover:bg-secondary text-white py-3 rounded-lg transition-colors">
+              申请报名
+            </a>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 card-hover">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fa fa-shopping-bag text-2xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark text-center mb-4">购买陶埙</h3>
+            <p class="text-gray-700 mb-6 text-center">
+              购买我们精心制作的陶埙，每售出一只，我们将捐赠部分收益用于项目发展。
+            </p>
+            <a href="./taobao.html" class="block text-center bg-primary hover:bg-secondary text-white py-3 rounded-lg transition-colors">
+              查看商品
+            </a>
+          </div>
+        </div>
+        
+        <div class="mt-12 bg-white rounded-xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-dark mb-6 text-center">合作伙伴</h3>
+          <div class="flex flex-wrap justify-center gap-8 items-center">
+            <div class="h-16 flex items-center">
+              <img src="https://picsum.photos/seed/partner1/200/80" alt="合作伙伴1" class="h-8 opacity-70 hover:opacity-100 transition-opacity">
+            </div>
+            <div class="h-16 flex items-center">
+              <img src="https://picsum.photos/seed/partner2/200/80" alt="合作伙伴2" class="h-8 opacity-70 hover:opacity-100 transition-opacity">
+            </div>
+            <div class="h-16 flex items-center">
+              <img src="https://picsum.photos/seed/partner3/200/80" alt="合作伙伴3" class="h-8 opacity-70 hover:opacity-100 transition-opacity">
+            </div>
+            <div class="h-16 flex items-center">
+              <img src="https://picsum.photos/seed/partner4/200/80" alt="合作伙伴4" class="h-8 opacity-70 hover:opacity-100 transition-opacity">
+            </div>
+            <div class="h-16 flex items-center">
+              <img src="https://picsum.photos/seed/partner5/200/80" alt="合作伙伴5" class="h-8 opacity-70 hover:opacity-100 transition-opacity">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-12 mt-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center">
+            <i class="fa fa-music mr-2"></i>云上埙声馆
+          </h3>
+          <p class="text-gray-400 mb-4">
+            用陶埙的振动，为听障儿童打开感知音乐的新窗口。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+          <ul class="space-y-2">
+            <li><a href="#storyteller" class="text-gray-400 hover:text-white transition-colors">故事人</a></li>
+            <li><a href="#background" class="text-gray-400 hover:text-white transition-colors">故事背景</a></li>
+            <li><a href="#special" class="text-gray-400 hover:text-white transition-colors">特别之处</a></li>
+            <li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors">精彩瞬间</a></li>
+            <li><a href="#donate" class="text-gray-400 hover:text-white transition-colors">支持我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">联系方式</h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mt-1 mr-2 text-gray-400"></i>
+              <span class="text-gray-400">重庆市永川区兴龙大道1009号</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone mt-1 mr-2 text-gray-400"></i>
+              <span class="text-gray-400">+86 153 2344 3386</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-envelope mt-1 mr-2 text-gray-400"></i>
+              <span class="text-gray-400">邮箱：2903043837</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">订阅通讯</h4>
+          <p class="text-gray-400 mb-4">
+            订阅我们的通讯，获取最新的项目进展和活动信息。
+          </p>
+          <form class="flex">
+            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-dark">
+            <button type="submit" class="bg-primary hover:bg-secondary px-4 py-2 rounded-r-lg transition-colors">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 云上埙声馆. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        
+        // 如果是移动端，点击导航后关闭菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+    
+    // 滚动时导航栏效果
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md');
+        navbar.classList.add('py-2');
+        navbar.classList.remove('py-3');
+      } else {
+        navbar.classList.remove('shadow-md');
+        navbar.classList.add('py-3');
+        navbar.classList.remove('py-2');
+      }
+    });
+    
+    // 图片懒加载
+    document.addEventListener("DOMContentLoaded", function() {
+      const lazyImages = [].slice.call(document.querySelectorAll("img"));
+      
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.classList.add("fade-in");
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+        
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+    

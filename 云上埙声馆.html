@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创新创业红——云上埙声馆</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B71C1C', // 深红色主色调
+                        secondary: '#D32F2F', // 次红色
+                        accent: '#FFC107', // 金色点缀
+                        neutral: '#F5F5F5', // 浅灰背景
+                        dark: '#333333', // 深色文本
+                    },
+                    fontFamily: {
+                        serif: ['Noto Serif SC', 'serif'],
+                        cursive: ['Ma Shan Zheng', 'cursive'],
+                    },
+                    boxShadow: {
+                        'artwork': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 2px rgba(183, 28, 28, 0.1)',
+                        'artwork-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(183, 28, 28, 0.2)',
+                    }
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .transition-custom {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .bg-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b71c1c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+            .artwork-card-hover {
+                @apply transform -translate-y-2 shadow-artwork-hover border-primary/30;
+            }
+            .artwork-img-zoom {
+                @apply scale-110;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral font-serif text-dark bg-pattern min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <nav id="main-nav" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="text-primary text-2xl"><i class="fa fa-music"></i></span>
+                <span class="font-cursive text-xl text-primary">云上埙声馆</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-dark hover:text-primary transition-colors">首页</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors">艺术家</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors">作品分类</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors">关于我们</a>
+                <a href="#" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-full transition-all hover:shadow-lg">联系我们</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-primary text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#" class="text-dark hover:text-primary transition-colors py-2">首页</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors py-2">艺术家</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors py-2">作品分类</a>
+                <a href="#" class="text-dark hover:text-primary transition-colors py-2">关于我们</a>
+                <a href="#" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-full transition-all hover:shadow-lg text-center">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/90 to-primary/70 z-0"></div>
+        <div class="absolute inset-0 bg-[url('https://picsum.photos/id/106/1920/1080')] bg-cover bg-center opacity-30 z-[-1]"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-cursive text-white text-shadow mb-4 leading-tight">创新创业红——云上埙声馆</h1>
+                <!-- 删除的部分1：“穿越千年的泥土之音 · 当代陶埙艺术典藏”及按钮相关内容 -->
+            </div>
+        </div>
+        <!-- 装饰性红色丝带 -->
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-primary/80 transform -skew-y-3"></div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-cursive text-primary mb-4">精选陶埙作品</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">探索我们精心挑选的当代陶埙艺术作品，每一件都承载着千年文化的积淀与现代艺术的创新</p>
+        </div>
+
+        <!-- 删除的部分2：作品筛选（全部作品、永川等按钮）相关内容 -->
+
+        <!-- 作品展示 -->
+        <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+            <!-- 作品1 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">永川</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/1.png" alt="相拥" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_1.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">相拥</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            李雨萱
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">2248</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 作品2 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">荣昌</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/2.png" alt="星中的光" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_2.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">星中的光</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            陈宇轩
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">4892</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 作品3 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">永川</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/3.png" alt="亲爱的祖国" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_3.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">亲爱的祖国</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            秦逸
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">2967</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 作品4 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">永川</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/4.png" alt="夜空中最亮的星" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_4.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">夜空中最亮的星</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            戴庭坤
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">3813</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 作品5 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">江津</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/5.png" alt="矩阵" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_5.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">矩阵</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            林宇阳
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">2607</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 作品6 -->
+            <article class="artwork bg-white rounded-xl overflow-hidden shadow-artwork border border-primary/10 transition-custom group">
+                <div class="relative overflow-hidden">
+                    <div class="artwork-tag absolute top-4 left-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full z-10">潼南</div>
+                    <div class="artwork-img-container h-64 overflow-hidden">
+                        <img src="../img/6.png" alt="天线熊猫" class="artwork-img w-full h-full object-cover transition-transform duration-700 group-hover:artwork-img-zoom">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div class="p-6">
+                            <p class="text-white text-sm mb-2"><a href="./user_6.html">点击查看详情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="artwork-info p-6">
+                    <h2 class="artwork-title text-xl font-medium mb-2">
+                        <a href="#" class="text-dark hover:text-primary transition-colors">天线熊猫</a>
+                    </h2>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="artist-link text-gray-600 hover:text-primary transition-colors flex items-center">
+                            <span class="text-primary mr-1"><i class="fa fa-user"></i></span>
+                            夏清颜
+                        </a>
+                        <div class="views flex items-center text-gray-500">
+                            <span class="view-icon mr-1"><i class="fa fa-eye"></i></span>
+                            <span class="view-count">3903</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- 加载更多按钮 -->
+        <div class="text-center mt-16">
+            <button id="load-more" class="bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white transition-colors px-8 py-3 rounded-full font-medium shadow-md hover:shadow-lg">
+                加载更多作品
+            </button>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-primary text-2xl"><i class="fa fa-music"></i></span>
+                        <span class="font-cursive text-xl">云上埙声馆</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">穿越千年的泥土之音 · 当代陶埙艺术典藏</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-qq text-xl"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">重庆市永川区兴龙大道319号</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-primary mr-3"></i>
+                            <span class="text-gray-400">15323443386</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">contact@yunshangxunsheng.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">开放时间</h3>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">周一至周五</span>
+                            <span class="text-gray-400">9:00 - 18:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">周六至周日</span>
+                            <span class="text-gray-400">10:00 - 17:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">法定节假日</span>
+                            <span class="text-gray-400">10:00 - 16:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>© <span id="current-year">2025</span> 云上埙声馆 | 非遗数字保护计划</p>
+            </div>
+        </div>
+        <!-- 删除的部分3：订阅电子简报相关内容 -->
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50 hover:bg-secondary">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 导航栏滚动效果
+        const nav = document.getElementById('main-nav');
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-3');
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2');
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        // 返回顶部功能
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 移动端菜单
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenuButton.innerHTML = '<i class="fa fa-bars"></i>';
+            } else {
+                mobileMenuButton.innerHTML = '<i class="fa fa-times"></i>';
+            }
+        });
+        
+        // 作品卡片悬停效果
+        const artworks = document.querySelectorAll('.artwork');
+        artworks.forEach(artwork => {
+            artwork.addEventListener('mouseenter', () => {
+                artwork.classList.add('artwork-card-hover');
+            });
+            
+            artwork.addEventListener('mouseleave', () => {
+                artwork.classList.remove('artwork-card-hover');
+            });
+        });
+        
+        // 加载更多按钮效果
+        const loadMoreBtn = document.getElementById('load-more');
+        loadMoreBtn.addEventListener('click', () => {
+            loadMoreBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 加载中...';
+            
+            // 模拟加载延迟
+            setTimeout(() => {
+                loadMoreBtn.innerHTML = '没有更多作品了';
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                loadMoreBtn.classList.remove('hover:bg-primary', 'hover:text-white');
+            }, 1500);
+        });
+        
+        // 设置当前年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    

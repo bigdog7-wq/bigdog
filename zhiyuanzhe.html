@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>志愿者招募 - 加入我们</title>
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --primary-light: #ff6b6b;
+            --primary-dark: #c0392b;
+            --text-color: #333;
+            --light-bg: #fff5f5;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.2em;
+            text-shadow: 1px 1px 2px rgba(231, 76, 60, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .container {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .qrcode-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .qrcode-container {
+            display: inline-block;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.2);
+            border: 2px dashed var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .qrcode-container img {
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .qrcode-title {
+            color: var(--primary-dark);
+            font-weight: bold;
+            margin: 15px 0 5px;
+            font-size: 1.2em;
+        }
+        
+        .steps {
+            margin: 40px 0;
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+        
+        .step:before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .step h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .contact {
+            background: rgba(231, 76, 60, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .contact h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+        
+        .heart {
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <!-- 可以替换为您组织的logo -->
+       
+        <h1>志愿者招募</h1>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <p>感谢您对我们组织的关注！我们正在寻找热心的志愿者加入我们的团队。</p>
+            <p>扫描下方二维码或通过其他方式报名，让我们一起为社会贡献力量！</p>
+        </div>
+        
+        <div class="qrcode-section">
+            <h2 class="qrcode-title">扫码报名加入志愿者</h2>
+            <div class="qrcode-container">
+                <img src="../img/志愿者.png" alt="志愿者报名二维码">
+            </div>
+            <p>使用微信/支付宝扫描上方二维码填写报名表</p>
+        </div>
+        
+        <div class="steps">
+            <div class="step">
+                <h3>第一步：扫描二维码</h3>
+                <p>使用手机扫描上方二维码，进入志愿者报名页面。</p>
+            </div>
+            
+            <div class="step">
+                <h3>第二步：填写信息</h3>
+                <p>如实填写您的个人信息、联系方式以及感兴趣的志愿服务领域。</p>
+            </div>
+            
+            <div class="step">
+                <h3>第三步：等待审核</h3>
+                <p>我们的工作人员将在3个工作日内与您联系，确认报名信息。</p>
+            </div>
+            
+            <div class="step">
+                <h3>第四步：参加培训</h3>
+                <p>通过审核后，您将参加我们的志愿者培训，了解服务内容和注意事项。</p>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h3>其他报名方式</h3>
+            <p>如果您无法使用二维码报名，也可以通过以下方式联系我们：</p>
+            <a href="tel:13800138000" class="btn">电话联系:15323443386</a>
+            <a href="mailto:volunteer@example.com" class="btn btn-outline">邮件报名:2903043837@qq.com</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 爱心志愿者组织 | 用<span class="heart"> ❤️ </span>温暖世界</p>
+    </footer>
+</body>
+</html>

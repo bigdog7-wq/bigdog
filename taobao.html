@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>淘宝二维码</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #e63946;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: "微软雅黑", sans-serif;
+      position: relative; /* 为绝对定位的标题做准备 */
+    }
+
+    /* 新增：页面大标题样式 */
+    .page-title {
+      position: absolute;
+      top: 20px; /* 距离顶部间距，可调整 */
+      font-size: 48px;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 加阴影让文字更立体 */
+    }
+
+    .qr-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      position: relative; /* 避免和大标题重叠，可按需调整 */
+      z-index: 1; /* 确保内容在标题上方 */
+    }
+
+    .qr-card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 320px;
+    }
+
+    .qr-title {
+      font-size: 22px;
+      color: #e63946;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .qr-desc {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .qr-container img {
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 20px;
+      border: 2px solid #e63946;
+      border-radius: 8px;
+    }
+
+    .tip-text {
+      color: #fff;
+      font-size: 14px;
+      opacity: 0.9;
+      text-align: center;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 36px; /* 小屏幕下缩小标题 */
+      }
+      .qr-card {
+        width: 90%;
+        padding: 20px;
+      }
+      .qr-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 新增：页面大标题 -->
+  <h1 class="page-title">童话陶埙</h1> 
+  <div class="qr-wrapper">
+    <div class="qr-card">
+      <h2 class="qr-title">扫码逛淘宝</h2>
+      <p class="qr-desc">打开手机淘宝扫一扫<br>发现更多惊喜好物，解锁专属优惠～</p>
+      <div class="qr-container">
+        <img src="../img/淘宝.jpg" alt="淘宝二维码"> 
+      </div>
+      <p class="qr-desc">或保存二维码到相册<br>打开淘宝APP自动识别</p>
+    </div>
+    <p class="tip-text">在这里，你能找到心仪的商品、有趣的店铺，让购物变得更简单快乐～</p>
+  </div>
+</body>
+
+</html>
